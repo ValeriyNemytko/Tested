@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import data from './data';
 import styled from '@emotion/styled'
@@ -22,10 +22,14 @@ function App() {
     const [search, setSearch] = useState('')
     let searchedList = [];
     let list = [];
+useEffect(()=>{
+
+})
+
 
     if (search) {
         searchedList = data.map((item, i) =>
-            data[i].includes(search) ? <StyledLi key={i}>{item}</StyledLi> : ''
+            data[i].toLowerCase().includes(search.toLowerCase()) ? <StyledLi key={i}>{item}</StyledLi> : ''
         );
     } else {
         list = data.map((item, i) =>
@@ -41,7 +45,7 @@ function App() {
     return (
         <div className="App">
             <h1>HELLO</h1>
-            <StyledInputSearch type="text" value={search} onChange={setListData}/>
+            <StyledInputSearch type="text" placeholder={'...Search'} value={search} onChange={(event)=>setListData(event)}/>
             <StyledOl>{search.length > 0 ? searchedList : list}</StyledOl>
         </div>
     );
